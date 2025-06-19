@@ -13,7 +13,5 @@ __pycache__/
 # Environment
 venv/
 
-# Ignore model files
-*.pkl
-
 *.ipynb
+*.csv
