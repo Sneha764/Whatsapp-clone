@@ -15,3 +15,5 @@ venv/
 
 *.ipynb
 *.csv
+
+requirements_backup.txt

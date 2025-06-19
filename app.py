@@ -3,16 +3,19 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import datetime
 import pickle
-
+import os
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module='sklearn')
 
 # Initialize Flask and configure app
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/messages.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/messages.db'
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'instance', 'messages.db')
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-import os
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key')
 db = SQLAlchemy(app)
 
 # Flask-Login setup
